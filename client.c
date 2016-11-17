@@ -17,9 +17,9 @@
 #define DEFAULT_HOSTNAME	"127.0.0.1"
 
 int main(int argc, char **argv) {
-
+    int firing_range[72];
 	int socket_fd;
-	int port;
+	int port,x,y;
 	struct hostent *server;
 	struct sockaddr_in server_addr;
 	char buffer[BUFFER_SIZE];
@@ -56,7 +56,7 @@ int main(int argc, char **argv) {
 
 	memcpy(&server_addr.sin_addr.s_addr,server->h_addr,
 		server->h_length);
-
+//something
 	/* port should be in "network byte order" (big-endian) so convert */
 	/* htons = host to network [byte order] short */
 	server_addr.sin_port=htons(port);
@@ -98,8 +98,9 @@ int main(int argc, char **argv) {
 		if (n<0) {
 			fprintf(stderr,"Error reading socket! %s\n",
 				strerror(errno));
-		}
-
+		 
+        }
+              
 		/* Print the response we got */
 		printf("Received back from server: %s\n\n",buffer);
 
@@ -111,4 +112,63 @@ int main(int argc, char **argv) {
 	close(socket_fd);
 
 	return 0;
+}
+int* find points(char *input){
+        int i;
+        int points[2];
+
+        if(strlen(input)==3){
+
+            for(i=0;i<strlen(buffer);i++){
+                
+                if(i==0){
+                    switch (buffer[i]) {
+                        case '1':
+                            points[0]=1;
+                            break;
+                        case '2':
+                            points[0]=2;
+                            break;
+                        case '3':
+                            points[0]=3;
+                            break
+                        case '4':
+                            points[0]=4;
+                            break;
+                        case '5':
+                            points[0]=5;
+                            break;
+                        case '6':
+                            points[0]=6;
+                            break;
+                        case '7':
+                            points[0]=7;
+                            break
+                        case '8':
+                            points[0]=8;
+                            break
+                        case '9':
+                            points[0]=9;
+                            break;
+                        default:
+                            points[0]=99;
+                            break;
+
+                    }
+              }
+              else if(i==1&&buffer[i]!='-'){
+                                 
+                                     
+                    }
+
+              }
+              else if(i==2){
+                    switch (buffer[i]) {
+
+
+                    }
+
+              }
+
+
 }
