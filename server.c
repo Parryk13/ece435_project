@@ -1,4 +1,5 @@
 #include <stdio.h>
+#include <stdlib.h>
 #include <unistd.h>
 #include <string.h>
 #include <errno.h>
@@ -13,6 +14,9 @@
 /* Default port to listen on */
 #define DEFAULT_PORT	31337
 
+char** boardinit(void);
+void display(char** board);
+
 int main(int argc, char **argv) {
 
 	int socket_fd,new_socket_fd;
@@ -22,7 +26,10 @@ int main(int argc, char **argv) {
 	int n;
 	socklen_t client_len;
 	char buffer[BUFFER_SIZE];
-	int i,result;
+	int i, result;
+	char** FiringBoard;
+	char** PlayBoard;
+
 
 	printf("Starting server on port %d\n",port);
 
@@ -108,7 +115,7 @@ int main(int argc, char **argv) {
 	printf("Exiting server\n\n");
 
 	/* Try to avoid TIME_WAIT */
-//	sleep(1);
+	sleep(1);
 
 	/* Close the sockets */
 	close(new_socket_fd);
@@ -116,3 +123,47 @@ int main(int argc, char **argv) {
 
 	return 0;
 }
+
+char** boardinit(void)
+{
+	int i,j;
+	char** board = malloc(17*sizeof( char*));
+	for(i=0; i<17; i++)
+	{
+		board[i] = malloc(17*sizeof(char));
+	}
+
+	for(i=0; i<17; i++)
+	{
+		for(j=0; j<17; j++)
+		{
+			if(i%2 == 1)
+			{
+				board[i][j]='-';
+			}
+			else
+			{
+				if(j%2 == 1) board[i][j]=' ';
+				else board[i][j]='|';
+			}
+		}
+	}
+	return board;
+}
+
+void display(char** board)
+{
+	int i,j;
+	printf("   A B C D E F G H \n");
+	for(i=0; i<17; i++)
+	{
+		if(i%2 == 0) printf("%d ",i/2);
+		else printf("  ");
+		for(j=0; j<17; j++)
+		{
+			printf("%c",board[i][j]);
+		}
+		printf("\n");
+	}
+}
+
