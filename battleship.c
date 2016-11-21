@@ -5,10 +5,11 @@
 #include <errno.h>
 
 #include <sys/socket.h>
-
 #include <netdb.h>
+#include "battleship.h"
 
-int* find points(char *input){
+
+int* findpoints(char *input){
         int i;
         int points[2];
 
@@ -18,15 +19,15 @@ int* find points(char *input){
                 
                 if(i==0){
                     switch (input[i]) {
-                       /* case '0':
-                            points[0]=0;
-                            break;*/
+                       // case '0':
+                       //     points[0]=0;
+                       //     break;
                         case '1':
                             points[0]=0;
                             break;
                         case '2':
                             points[0]=1;
-                            break
+                            break;
                         case '3':
                             points[0]=2;
                             break;
@@ -38,10 +39,10 @@ int* find points(char *input){
                             break;
                         case '6':
                             points[0]=5;
-                            break
+                            break;
                         case '7':
                             points[0]=6;
-                            break
+                            break;
                         case '8':
                             points[0]=7;
                             break;
@@ -84,7 +85,7 @@ int* find points(char *input){
                             break;
                         case 'g':
                             points[1]=6;
-                            break
+                            break;
                         case 'h':
                             points[1]=7;
                             break;
@@ -102,3 +103,53 @@ int* find points(char *input){
     }
     return points;            
 }
+
+
+char** boardinit(void)
+{
+	int i,j;
+	char** board = malloc(17*sizeof( char*));
+	for(i=0; i<17; i++)
+	{
+		board[i] = malloc(17*sizeof(char));
+	}
+
+	for(i=0; i<17; i++)
+	{
+		for(j=0; j<17; j++)
+		{
+			if(i%2 == 1)
+			{
+				board[i][j]='-';
+			}
+			else
+			{
+				if(j%2 == 1) board[i][j]=' ';
+				else board[i][j]='|';
+			}
+		}
+	}
+	return board;
+}
+
+void display(char** board)
+{
+	int i,j;
+	printf("   A B C D E F G H \n");
+	for(i=0; i<17; i++)
+	{
+		if(i%2 == 0) printf("%d ",i/2);
+		else printf("  ");
+		for(j=0; j<17; j++)
+		{
+			printf("%c",board[i][j]);
+		}
+		printf("\n");
+	}
+}
+
+//char** setship(char **board, char input)
+//{
+	
+//}
+
