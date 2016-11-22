@@ -38,7 +38,7 @@ int main(int argc, char **argv) {
 	hints.ai_family = AF_INET;
 	hints.ai_socktype = SOCK_STREAM;
 
-	result=getaddrinfo("192.168.8.51","31337",&hints,&server_info);
+	result=getaddrinfo("130.111.248.75","31337",&hints,&server_info);
 	if (result<0) {
 		fprintf(stderr,"Error getaddrinfo!\n");
 		return -1;

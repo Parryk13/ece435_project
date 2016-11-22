@@ -9,19 +9,15 @@
 #include "battleship.h"
 
 
-int* findpoints(char *input){
+int findpoints(char *input,int *points){
         int i;
-        int points[2];
 
         if(strlen(input)==3){
 
             for(i=0;i<strlen(input);i++){
                 
                 if(i==0){
-                    switch (input[i]) {
-                       // case '0':
-                       //     points[0]=0;
-                       //     break;
+                    switch(input[i]){
                         case '1':
                             points[0]=0;
                             break;
@@ -50,21 +46,20 @@ int* findpoints(char *input){
                             points[0]=8;
                             break;
                         default:
-
-                            points[0]=99;
+                            points[0]=-1;
                             break;
 
                     }
-              }
-              else if(i==1&&input[i]!='-'){
-                           points[0]=99;
-                           points[1]=99;
-                           return points;
-                    }
+                }
+                else if(i==1&&input[i]!='-'){
+                           points[0]=-1;
+                           points[1]=-1;
+                           return -1;
+                }
 
-              }
-              else if(i==2){
-                    switch (buffer[i]) {
+              
+                else if(i==2){
+                    switch (input[i]) {
                         case 'a':
                             points[1]=0;
                             break;
@@ -90,18 +85,19 @@ int* findpoints(char *input){
                             points[1]=7;
                             break;
                         default:
-                            points[1]=99;
+                            points[1]=-1;
                             break;
                     }
 
               }
-         }  
-    }
+         }
+    } 
+        
     else {
-        points[0]=99;
-        points[1]=99;
+         points[0]=-1;
+         points[1]=-1; 
+         return 0;    
     }
-    return points;            
 }
 
 
@@ -145,11 +141,16 @@ void display(char** board)
 			printf("%c",board[i][j]);
 		}
 		printf("\n");
-	}
+     
+    }
+    return;
 }
 
 //char** setship(char **board, char input)
 //{
 	
 //}
+
+
+    
 
