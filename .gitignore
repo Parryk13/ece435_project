@@ -6,6 +6,6 @@
 *.exe
 *.o
 *.so
-display
+*
 
 
