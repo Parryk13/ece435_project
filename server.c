@@ -21,13 +21,16 @@ int main(int argc, char **argv) {
 	struct sockaddr_in server_addr, client_addr;
 	struct addrinfo hints,*server_info;
 	int port=DEFAULT_PORT;
+    int points[2];
+    char input[3]={'5','-','a'};
 	int n;
 	socklen_t client_len;
 	char buffer[BUFFER_SIZE];
 	int i, result;
 	char** FiringBoard;
 	char** PlayBoard;
-
+    findpoints(input,points) ; //test case for findpoints
+    printf("%d:%d\n",points[0],points[1]);
 	FiringBoard = boardinit();
 	display(FiringBoard);
 

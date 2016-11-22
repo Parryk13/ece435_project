@@ -11,10 +11,9 @@
 
 int findpoints(char *input,int *points){
         int i;
+        if(strlen(input)>=3){
 
-        if(strlen(input)==3){
-
-            for(i=0;i<strlen(input);i++){
+            for(i=0;i<3;i++){
                 
                 if(i==0){
                     switch(input[i]){
@@ -52,8 +51,8 @@ int findpoints(char *input,int *points){
                     }
                 }
                 else if(i==1&&input[i]!='-'){
-                           points[0]=-1;
-                           points[1]=-1;
+                           points[0]=-2;
+                           points[1]=-2;
                            return -1;
                 }
 
@@ -85,7 +84,7 @@ int findpoints(char *input,int *points){
                             points[1]=7;
                             break;
                         default:
-                            points[1]=-1;
+                            points[1]=-3;
                             break;
                     }
 
@@ -94,8 +93,8 @@ int findpoints(char *input,int *points){
     } 
         
     else {
-         points[0]=-1;
-         points[1]=-1; 
+         points[0]=-4;
+         points[1]=-4; 
          return 0;    
     }
 }
