@@ -27,8 +27,8 @@ int main(int argc, char **argv) {
 	socklen_t client_len;
 	char buffer[BUFFER_SIZE];
 	int i, result;
-	char** FiringBoard = NULL;
-	char** PlayBoard = NULL;
+	//char** FiringBoard = NULL;
+	char PlayBoard[8][8];
 	boardinit(PlayBoard);
 	printf("PlayBoard initialized\n");
 	display(PlayBoard);
