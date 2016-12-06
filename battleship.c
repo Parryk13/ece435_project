@@ -141,7 +141,7 @@ void display(char board[9][9])
 int setship(char board[9][9], char ship)
 {
   char input[8];
-  char *direction = NULL;
+  char direction[4];
   int point[2];
   int size,k,test;
 
@@ -170,19 +170,23 @@ int setship(char board[9][9], char ship)
   printf("Enter start point for ship (in form number-letter): ");
   scanf("%s", input);
   printf("Input:%s\n", input);
-  //test=findpoints(input,point);
-  //printf("its not this bs\n");
+  test=findpoints(input,points);
+  printf("its not this bs\n");
+  if(findpoints(test <0)
+  {
+        printf("Invalid Input");
+        return -1;
+  }
   //prompt for direction
-  //printf("Choose a direction (u for up, d for down, l for left, or r for right): ");
-  printf("super weird?\n");
-  scanf("%c", direction);
-  if(*direction != 'u' && *direction != 'd' && *direction != 'l' && *direction != 'r')
+  printf("Choose a direction (u for up, d for down, l for left, or r for right): ");
+  scanf("%s", direction);
+  if(direction[0] != 'u' && direction[0] != 'd' && direction[0] != 'l' && direction[0] != 'r')
   {
     printf("Invalid direction");
     return -1;
   }
 
-  switch(*direction){
+  switch(direction[0]){
         case 'u':
             //checks that ship size doesn't overflow board
             if (point[0] - (size-1) < 0)
