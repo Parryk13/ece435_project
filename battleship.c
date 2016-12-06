@@ -105,7 +105,7 @@ int findpoints(char *input,int *points){
          return 0;
     }
     printf("Exit\n");
-    return 0;
+    return 1;
 }
 
 
