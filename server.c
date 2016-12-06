@@ -28,7 +28,7 @@ int main(int argc, char **argv) {
 	char buffer[BUFFER_SIZE];
 	int i, result;
 	//char** FiringBoard = NULL;
-	char PlayBoard[8][8];
+	char PlayBoard[9][9];
 	boardinit(PlayBoard);
 	printf("PlayBoard initialized\n");
 	display(PlayBoard);
