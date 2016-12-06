@@ -165,8 +165,9 @@ int setship(char board[9][9], char ship)
   }
 
   //prompt for start point
-  printf("Enter start point for ship (in form letter-number): ");
+  printf("Enter start point for ship (in form number-letter): ");
   scanf("%s", input);
+  printf("Input:%s\n", input);
   if(findpoints(input, point) <0)
   {
         printf("Invalid Input");
