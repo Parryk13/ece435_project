@@ -173,13 +173,13 @@ int setship(char **board, char ship)
   //prompt for direction
   printf("Choose a direction (u for up, d for down, l for left, or r for right): ");
   scanf("%c", direction);
-  if(direction != 'u' && direction != 'd' && direction != 'l' && direction != 'r')
+  if(*direction != 'u' && *direction != 'd' && *direction != 'l' && *direction != 'r')
   {
     printf("Invalid direction");
     return -1;
   }
 
-  switch(direction){
+  switch(*direction){
         case 'u':
             //checks that ship size doesn't overflow board
             if (point[0] - (size-1) < 0)
