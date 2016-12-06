@@ -35,8 +35,13 @@ int main(int argc, char **argv) {
 	printf("Set battleship\n");
 	setship(PlayBoard, 'b');
 	display(PlayBoard);
-
-
+	setship(PlayBoard, 'C');
+	display(PlayBoard);
+	setship(PlayBoard, 's');
+	display(PlayBoard);
+	setship(PlayBoard, 'd');
+	display(PlayBoard);
+	setship(PlayBoard, 'c');
 
 	printf("Starting server on port %d\n",port);
 
