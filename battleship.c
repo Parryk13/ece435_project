@@ -121,11 +121,11 @@ void display(char board[8][8])
 {
 	int i,j;
 	printf("   A B C D E F G H \n");
-	for(i=0; i<17; i++)
+	for(i=0; i<8; i++)
 	{
-		if(i%2 == 0) printf("-%d ",i/2);
+		if(i%2 == 0) printf("%d ",i/2);
 		else printf("  ");
-		for(j=0; j<17; j++)
+		for(j=0; j<8; j++)
 		{
 			printf("|%c",board[i][j]);
 		}
