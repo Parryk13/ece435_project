@@ -49,12 +49,14 @@ int findpoints(char *input,int *points){
                             break;
 
                     }
+                    printf("Point[0] set\n");
                 }
                 else if(i==1&&input[i]!='-'){
                            points[0]=-2;
                            points[1]=-2;
                            return -1;
                 }
+                printf("Character - recognized\n");
 
 
                 else if(i==2){
@@ -90,7 +92,7 @@ int findpoints(char *input,int *points){
                             points[1]=-3;
                             break;
                     }
-
+                  printf("Point[1] set\n");
               }
          }
     }
@@ -135,9 +137,9 @@ void display(char board[9][9])
 }
 int setship(char board[9][9], char ship)
 {
-  char *input = NULL;
+  char* input= NULL;
   char *direction = NULL;
-  int *point = NULL;
+  int point[2];
   int size,k;
 
 //Changes the size depending on which ship
