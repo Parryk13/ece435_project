@@ -83,6 +83,9 @@ int findpoints(char *input,int *points){
                         case 'h':
                             points[1]=7;
                             break;
+                        case 'i':
+                            points[1]=8;
+                            break;
                         default:
                             points[1]=-3;
                             break;
@@ -100,31 +103,17 @@ int findpoints(char *input,int *points){
 }
 
 
-char** boardinit(void)
+int boardinit(char** board)
 {
 	int i,j;
-	char** board = malloc(17*sizeof( char*));
-	for(i=0; i<17; i++)
+	for(i=0; i<8; i++)
 	{
-		board[i] = malloc(17*sizeof(char));
-	}
-
-	for(i=0; i<17; i++)
-	{
-		for(j=0; j<17; j++)
-		{
-			if(i%2 == 1)
-			{
-				board[i][j]='-';
-			}
-			else
-			{
-				if(j%2 == 1) board[i][j]=' ';
-				else board[i][j]='|';
-			}
-		}
-	}
-	return board;
+    for(j=0; j<8; j++)
+    {
+      board[i][j] = ' ';
+    }
+  }
+  return 0;
 }
 
 void display(char** board)
@@ -144,7 +133,133 @@ void display(char** board)
     }
     return;
 }
-//char** setship(char **board, char input)
-//{
+setship(char **board, char ship)
+{
+  char *input;
+  char direction;
+  int *point;
+  int size;
 
-//}
+//Changes the size depending on which ship
+  switch(ship){
+      case 'd':
+          size=2;
+          break;
+      case 's':
+          size=3;
+          break;
+      case 'c':
+          size=3;
+          break;
+      case 'b':
+          size=4;
+          break;
+      case 'C':
+          size=5;
+          break;
+      default:
+          return -1;
+  }
+
+  //prompt for start point
+  printf("Enter start point for ship (in form letter-number): ");
+  scanf("%s", input);
+  if(findpoints(input, point) <0)
+  {
+        printf("Invalid Input");
+        return -1;
+  }
+  //prompt for direction
+  printf("Choose a direction (u for up, d for down, l for left, or r for right): ");
+  scanf("%c", direction);
+  if(direction != 'u' && direction != 'd' && direction != 'l' && direction != 'r')
+  {
+    printf("Invalid direction");
+    return -1;
+  }
+
+  switch(direction){
+        case 'u':
+            //checks that ship size doesn't overflow board
+            if (point[0] - (size-1) < 0)
+            {
+              printf("Invalid placement");
+              setship(board,ship);
+              return 0;
+            }
+            //checks that ship placement doesn't overwrite ships
+            for (int k=0; k<size; k++){
+              if(board[point[0] - k] != ' '){
+                printf("Invalid placement");
+                setship(board,ship);
+               return 0;
+              }
+            }
+            for(int k=0; k<size; k++)
+            {
+              board[point[0] - k][point[1]] = ship;
+            }
+            break;
+      case 'd':
+            if (point[0] + (size-1) > 7)
+            {
+              printf("Invalid placement");
+              setship(board,ship);
+              return 0;
+            }
+            //checks that ship placement doesn't overwrite ships
+            for (int k=0; k<size; k++){
+              if(board[point[0] + k] != ' '){
+                printf("Invalid placement");
+                setship(board,ship);
+               return 0;
+              }
+            }
+            for(int k=0; k<size; k++)
+            {
+              board[point[0] + k][point[1]] = ship;
+            }
+            break;
+      case 'l':
+            if(point[1] - (size-1) < 0)
+            {
+                  printf("Invalid placement");
+                  setship(board,ship);
+                 return 0;
+            }
+            for(int k=0; k<size; k++)
+            {
+                  if(board[point[0]][point[1] - k] != ' '){
+                        printf("Invalid placement");
+                        setship(board,ship);
+                        return 0;
+                  }
+            }
+            for(int k=0; k<size; k++)
+            {
+                  board[point[0]][point[1] - k] = ship;
+            }
+            break;
+      case 'r':
+            if(point[1] + (size-1) > 7)
+            {
+                  printf("Invalid placement");
+                  setship(board,ship);
+                  return 0;
+            }
+            for(int k=0; k<size; k++)
+            {
+                  if(board[point[0]][point[1]+k] != ' '){
+                        printf("Invalid placement");
+                        setship(board,ship);
+                        return 0;
+                  }
+            }
+            for(int k=0; k<size; k++)
+            {
+                  board[point[0]][point[1]+k] = ship;
+            }
+            break;
+      }
+      return 0;
+}
