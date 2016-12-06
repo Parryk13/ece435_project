@@ -88,6 +88,9 @@ int findpoints(char *input,int *points){
                         case 'i':
                             points[1]=8;
                             break;
+                        case 'j':
+                              points[1]=9;
+                              break;
                         default:
                             return -1;
                             break;
@@ -108,12 +111,12 @@ int findpoints(char *input,int *points){
 }
 
 
-int boardinit(char board[9][9])
+int boardinit(char board[10][10])
 {
 	int i,j;
-	for(i=0; i<9; i++)
+	for(i=0; i<10; i++)
 	{
-    for(j=0; j<9; j++)
+    for(j=0; j<10; j++)
     {
       board[i][j] = ' ';
     }
@@ -121,14 +124,14 @@ int boardinit(char board[9][9])
   return 0;
 }
 
-void display(char board[9][9])
+void display(char board[10][10])
 {
 	int i,j;
 	printf("   A B C D E F G H I\n");
-	for(i=0; i<9; i++)
+	for(i=0; i<10; i++)
 	{
 		printf("%d ",i+1);
-		for(j=0; j<9; j++)
+		for(j=0; j<10; j++)
 		{
 			printf("|%c",board[i][j]);
 		}
@@ -137,9 +140,9 @@ void display(char board[9][9])
     }
     return;
 }
-int setship(char board[9][9], char ship)
+int setship(char board[10][10], char ship)
 {
-  char input[8];
+  char input[12];
   char direction[4];
   int point[2];
   int size,k,test;
@@ -173,7 +176,7 @@ int setship(char board[9][9], char ship)
   //prompt for start point
  // printf("Enter start point for ship (in form number-letter): ");
   scanf("%s", input);
-  printf("Input:%s\n", input);
+ // printf("Input:%s\n", input);
   test=findpoints(input,point);
   if(test <0)
   {
@@ -214,7 +217,7 @@ int setship(char board[9][9], char ship)
             }
             break;
       case 'd':
-            if (point[0] + (size-1) > 7)
+            if (point[0] + (size-1) > 9)
             {
               printf("Invalid placement, please try again \n");
               setship(board,ship);
@@ -254,7 +257,7 @@ int setship(char board[9][9], char ship)
             }
             break;
       case 'r':
-            if(point[1] + (size-1) > 7)
+            if(point[1] + (size-1) > 9)
             {
                   printf("Invalid placement, please try again \n");
                   setship(board,ship);
