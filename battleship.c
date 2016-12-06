@@ -45,11 +45,10 @@ int findpoints(char *input,int *points){
                             points[0]=8;
                             break;
                         default:
-                            points[0]=-1;
-                            break;
+                            return -1;
 
                     }
-                    printf("Point[0] set\n");
+                    //printf("Point[0] set\n");
                 }
                 else if(i==1&&input[i]!='-'){
                            points[0]=-2;
@@ -60,7 +59,7 @@ int findpoints(char *input,int *points){
 
 
                 else if(i==2){
-                    printf("Character - recognized\n");
+                    //printf("Character - recognized\n");
                     switch (input[i]) {
                         case 'a':
                             points[1]=0;
@@ -90,12 +89,12 @@ int findpoints(char *input,int *points){
                             points[1]=8;
                             break;
                         default:
-                            points[1]=-3;
+                            return -1;
                             break;
                     }
-                  printf("Point[1] set\n");
+                  //printf("Point[1] set\n");
               }
-              printf("i=%d\n",i);
+              //printf("i=%d\n",i);
          }
     }
 
@@ -179,7 +178,8 @@ int setship(char board[9][9], char ship)
   if(test <0)
   {
         printf("Invalid Input");
-        return -1;
+        setship(board,ship);
+        return 0;
   }
   //prompt for direction
   printf("Choose a direction (u for up, d for down, l for left, or r for right): ");
