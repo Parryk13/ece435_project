@@ -14,7 +14,7 @@ int findpoints(char *input,int *points){
         if(strlen(input)>=3){
 
             for(i=0;i<3;i++){
-                
+
                 if(i==0){
                     switch(input[i]){
                         case '1':
@@ -56,7 +56,7 @@ int findpoints(char *input,int *points){
                            return -1;
                 }
 
-              
+
                 else if(i==2){
                     switch (input[i]) {
                         case 'a':
@@ -90,12 +90,12 @@ int findpoints(char *input,int *points){
 
               }
          }
-    } 
-        
+    }
+
     else {
          points[0]=-4;
-         points[1]=-4; 
-         return 0;    
+         points[1]=-4;
+         return 0;
     }
 }
 
@@ -133,23 +133,18 @@ void display(char** board)
 	printf("   A B C D E F G H \n");
 	for(i=0; i<17; i++)
 	{
-		if(i%2 == 0) printf("%d ",i/2);
+		if(i%2 == 0) printf("-%d ",i/2);
 		else printf("  ");
 		for(j=0; j<17; j++)
 		{
-			printf("%c",board[i][j]);
+			printf("|%c",board[i][j]);
 		}
-		printf("\n");
-     
+		printf("|\n");
+
     }
     return;
 }
-
 //char** setship(char **board, char input)
 //{
-	
+
 //}
-
-
-    
-
