@@ -143,7 +143,7 @@ int setship(char board[9][9], char ship)
   char input[8];
   char *direction = NULL;
   int point[2];
-  int size,k;
+  int size,k,test;
 
 //Changes the size depending on which ship
   switch(ship){
@@ -170,7 +170,9 @@ int setship(char board[9][9], char ship)
   printf("Enter start point for ship (in form number-letter): ");
   scanf("%s", input);
   printf("Input:%s\n", input);
-  if(findpoints(input, point) <0)
+  test=findpoints(input,points);
+  printf("its not this bs\n");
+  if(test <0)
   {
         printf("Invalid Input");
         return -1;
