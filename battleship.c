@@ -9,7 +9,7 @@
 #include "battleship.h"
 
 
-int findpoints(char *input,int *points){
+int* findpoints(char *input,int *points){
         int i;
         if(strlen(input)>=3){
 
@@ -138,7 +138,7 @@ int setship(char **board, char ship)
   char *input;
   char direction;
   int *point;
-  int size;
+  int size,k;
 
 //Changes the size depending on which ship
   switch(ship){
@@ -188,14 +188,14 @@ int setship(char **board, char ship)
               return 0;
             }
             //checks that ship placement doesn't overwrite ships
-            for (int k=0; k<size; k++){
-              if(board[point[0] - k] != ' '){
+            for (k=0; k<size; k++){
+              if(board[point[0] - k][point[1]] != ' '){
                 printf("Invalid placement");
                 setship(board,ship);
                return 0;
               }
             }
-            for(int k=0; k<size; k++)
+            for(k=0; k<size; k++)
             {
               board[point[0] - k][point[1]] = ship;
             }
@@ -208,14 +208,14 @@ int setship(char **board, char ship)
               return 0;
             }
             //checks that ship placement doesn't overwrite ships
-            for (int k=0; k<size; k++){
-              if(board[point[0] + k] != ' '){
+            for (k=0; k<size; k++){
+              if(board[point[0] + k][point[1]] != ' '){
                 printf("Invalid placement");
                 setship(board,ship);
                return 0;
               }
             }
-            for(int k=0; k<size; k++)
+            for(k=0; k<size; k++)
             {
               board[point[0] + k][point[1]] = ship;
             }
@@ -227,7 +227,7 @@ int setship(char **board, char ship)
                   setship(board,ship);
                  return 0;
             }
-            for(int k=0; k<size; k++)
+            for( k=0; k<size; k++)
             {
                   if(board[point[0]][point[1] - k] != ' '){
                         printf("Invalid placement");
@@ -235,7 +235,7 @@ int setship(char **board, char ship)
                         return 0;
                   }
             }
-            for(int k=0; k<size; k++)
+            for( k=0; k<size; k++)
             {
                   board[point[0]][point[1] - k] = ship;
             }
@@ -247,7 +247,7 @@ int setship(char **board, char ship)
                   setship(board,ship);
                   return 0;
             }
-            for(int k=0; k<size; k++)
+            for( k=0; k<size; k++)
             {
                   if(board[point[0]][point[1]+k] != ' '){
                         printf("Invalid placement");
@@ -255,7 +255,7 @@ int setship(char **board, char ship)
                         return 0;
                   }
             }
-            for(int k=0; k<size; k++)
+            for( k=0; k<size; k++)
             {
                   board[point[0]][point[1]+k] = ship;
             }
