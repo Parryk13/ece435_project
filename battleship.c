@@ -100,6 +100,7 @@ int findpoints(char *input,int *points){
          points[1]=-4;
          return 0;
     }
+    return 0;
 }
 
 
@@ -135,9 +136,9 @@ void display(char** board)
 }
 int setship(char **board, char ship)
 {
-  char *input;
-  char direction;
-  int *point;
+  char *input = NULL;
+  char *direction = NULL;
+  int *point = NULL;
   int size,k;
 
 //Changes the size depending on which ship
