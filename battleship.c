@@ -279,3 +279,8 @@ int setship(char board[10][10], char ship)
       }
       return 0;
 }
+
+int checkhit(char[9][9] board, int *coord){
+      if(board[coord[0]][coord[1]] == ' ') return 1;
+      if(board)
+}
