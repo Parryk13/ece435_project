@@ -56,10 +56,11 @@ int findpoints(char *input,int *points){
                            points[1]=-2;
                            return -1;
                 }
-                printf("Character - recognized\n");
+
 
 
                 else if(i==2){
+                    printf("Character - recognized\n");
                     switch (input[i]) {
                         case 'a':
                             points[1]=0;
