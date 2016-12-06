@@ -107,9 +107,9 @@ int findpoints(char *input,int *points){
 int boardinit(char board[9][9])
 {
 	int i,j;
-	for(i=0; i<8; i++)
+	for(i=0; i<9; i++)
 	{
-    for(j=0; j<8; j++)
+    for(j=0; j<9; j++)
     {
       board[i][j] = ' ';
     }

@@ -32,6 +32,9 @@ int main(int argc, char **argv) {
 	boardinit(PlayBoard);
 	printf("PlayBoard initialized\n");
 	display(PlayBoard);
+	printf("Set battleship\n");
+	setship(PlayBoard, b);
+	display(PlayBoard);
 
 
 
