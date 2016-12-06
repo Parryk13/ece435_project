@@ -22,17 +22,16 @@ int main(int argc, char **argv) {
 	struct addrinfo hints,*server_info;
 	int port=DEFAULT_PORT;
     int points[2];
-    char input[3]={'5','-','a'};
+    //char input[3]={'5','-','a'};
 	int n;
 	socklen_t client_len;
 	char buffer[BUFFER_SIZE];
 	int i, result;
 	char** FiringBoard;
 	char** PlayBoard;
-    findpoints(input,points) ; //test case for findpoints
-    printf("%d:%d\n",points[0],points[1]);
-	FiringBoard = boardinit();
-	display(FiringBoard);
+	boardinit(PlayBoard);
+	display(PlayBoard);
+
 
 
 	printf("Starting server on port %d\n",port);
@@ -127,4 +126,3 @@ int main(int argc, char **argv) {
 
 	return 0;
 }
-
