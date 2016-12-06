@@ -33,7 +33,7 @@ int main(int argc, char **argv) {
 	printf("PlayBoard initialized\n");
 	display(PlayBoard);
 	printf("Set battleship\n");
-	setship(PlayBoard, b);
+	setship(PlayBoard, 'b');
 	display(PlayBoard);
 
 
