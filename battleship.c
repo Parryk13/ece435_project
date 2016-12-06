@@ -138,7 +138,7 @@ void display(char board[9][9])
 }
 int setship(char board[9][9], char ship)
 {
-  char* input= NULL;
+  char input[4];
   char *direction = NULL;
   int point[2];
   int size,k;
