@@ -133,7 +133,7 @@ void display(char** board)
     }
     return;
 }
-setship(char **board, char ship)
+int setship(char **board, char ship)
 {
   char *input;
   char direction;
