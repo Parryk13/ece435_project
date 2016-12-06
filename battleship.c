@@ -111,12 +111,12 @@ int findpoints(char *input,int *points){
 }
 
 
-int boardinit(char board[10][10])
+int boardinit(char board[9][9])
 {
 	int i,j;
-	for(i=0; i<10; i++)
+	for(i=0; i<9; i++)
 	{
-    for(j=0; j<10; j++)
+    for(j=0; j<9; j++)
     {
       board[i][j] = ' ';
     }
@@ -124,14 +124,14 @@ int boardinit(char board[10][10])
   return 0;
 }
 
-void display(char board[10][10])
+void display(char board[9][9])
 {
 	int i,j;
-	printf("   A B C D E F G H I\n");
-	for(i=0; i<10; i++)
+	printf("   A B C D E F G H I \n");
+	for(i=0; i<9; i++)
 	{
 		printf("%d ",i+1);
-		for(j=0; j<10; j++)
+		for(j=0; j<9; j++)
 		{
 			printf("|%c",board[i][j]);
 		}
@@ -140,7 +140,7 @@ void display(char board[10][10])
     }
     return;
 }
-int setship(char board[10][10], char ship)
+int setship(char board[9][9], char ship)
 {
   char input[12];
   char direction[4];
@@ -217,7 +217,7 @@ int setship(char board[10][10], char ship)
             }
             break;
       case 'd':
-            if (point[0] + (size-1) > 9)
+            if (point[0] + (size-1) > 8)
             {
               printf("Invalid placement, please try again \n");
               setship(board,ship);
@@ -257,7 +257,7 @@ int setship(char board[10][10], char ship)
             }
             break;
       case 'r':
-            if(point[1] + (size-1) > 9)
+            if(point[1] + (size-1) > 8)
             {
                   printf("Invalid placement, please try again \n");
                   setship(board,ship);
