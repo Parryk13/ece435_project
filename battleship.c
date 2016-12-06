@@ -171,10 +171,10 @@ int setship(char board[9][9], char ship)
   scanf("%s", input);
   printf("Input:%s\n", input);
   //test=findpoints(input,point);
-  printf("its not this bs\n");
-
+  //printf("its not this bs\n");
   //prompt for direction
-  printf("Choose a direction (u for up, d for down, l for left, or r for right): ");
+  //printf("Choose a direction (u for up, d for down, l for left, or r for right): ");
+  printf("super weird?\n")
   scanf("%c", direction);
   if(*direction != 'u' && *direction != 'd' && *direction != 'l' && *direction != 'r')
   {
