@@ -104,7 +104,7 @@ int findpoints(char *input,int *points){
 }
 
 
-int boardinit(char** board)
+int boardinit(char board[8][8])
 {
 	int i,j;
 	for(i=0; i<8; i++)
@@ -117,7 +117,7 @@ int boardinit(char** board)
   return 0;
 }
 
-void display(char** board)
+void display(char board[8][8])
 {
 	int i,j;
 	printf("   A B C D E F G H \n");
@@ -134,7 +134,7 @@ void display(char** board)
     }
     return;
 }
-int setship(char **board, char ship)
+int setship(char board[8][8], char ship)
 {
   char *input = NULL;
   char *direction = NULL;
