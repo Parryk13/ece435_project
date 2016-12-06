@@ -172,7 +172,7 @@ int setship(char board[9][9], char ship)
   printf("Input:%s\n", input);
   test=findpoints(input,points);
   printf("its not this bs\n");
-  if(findpoints(test <0)
+  if(test <0)
   {
         printf("Invalid Input");
         return -1;
