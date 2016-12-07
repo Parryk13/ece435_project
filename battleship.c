@@ -281,6 +281,17 @@ int setship(char board[9][9], char ship)
 }
 
 int checkhit(char[9][9] board, int *coord){
-      if(board[coord[0]][coord[1]] == ' ') return 1;
-      if(board)
+      if(board[coord[0]][coord[1]] == ' '){
+            printf("Miss at [%d][%d]\n", coord[0], coord[1]);
+            return 1;
+      }
+      else if(board[coord[0]][coord[1]] == 'X'){
+            printf("Shot already recorded\n");
+            return -1;
+      }
+      else{
+            board[coord[0]][coord[1]] = 'X';
+            printf("Hit at [%d][%d]\n", coord[0], coord[1]);
+            return 2;
+      }
 }
