@@ -16,6 +16,8 @@
 #define DEFAULT_PORT	31337
 
 int main(int argc, char **argv) {
+	//FILE *pf;
+	//char command[20];
 
 	int socket_fd,new_socket_fd;
 	struct sockaddr_in server_addr, client_addr;
@@ -30,7 +32,7 @@ int main(int argc, char **argv) {
 	int result;
 	//char** FiringBoard = NULL;
 	char player1fire[9][9],player1hit[9][9];
-
+	sprintf(command, "clear")
 
 	printf("Starting server on port %d\n",port);
 
@@ -100,13 +102,13 @@ int main(int argc, char **argv) {
 	setship(player1hit, 'c');
 	display(player1hit);
 	while(1) {
+		system("clear");
 		display(player1fire);
             printf("--------------------------\n");
             display(player1hit);
 		printf("waiting for player 2 to fire\n");
 		/* Someone connected!  Let's try to read BUFFER_SIZE-1 bytes */
 		memset(buffer,0,BUFFER_SIZE);
-		printf("Waiting for player 2...\n");
 		n = read(new_socket_fd,buffer,(BUFFER_SIZE-1));
 		if (n==0) {
 			fprintf(stderr,"Connection to client lost\n\n");
@@ -122,6 +124,7 @@ int main(int argc, char **argv) {
 		findpoints(buffer,shots);
 		memset(buffer,0,BUFFER_SIZE);
 		buffer[0] = checkhit(player1hit,shots);
+		system("clear");
 		display(player1fire);
 		printf("--------------------------\n");
 		display(player1hit);
