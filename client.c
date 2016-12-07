@@ -119,6 +119,7 @@ int main(int argc, char **argv) {
 			if (!strncmp(buffer,"yes",3)) goto restart;
 			else break;
 		}
+            printf("Waiting for player 1...\n");
             n = read(socket_fd,buffer,(BUFFER_SIZE-1));
             if (n==0) {
 			fprintf(stderr,"Connection to client lost\n\n");

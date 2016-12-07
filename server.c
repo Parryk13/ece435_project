@@ -103,6 +103,7 @@ int main(int argc, char **argv) {
 
 		/* Someone connected!  Let's try to read BUFFER_SIZE-1 bytes */
 		memset(buffer,0,BUFFER_SIZE);
+		printf("Waiting for player 2...\n");
 		n = read(new_socket_fd,buffer,(BUFFER_SIZE-1));
 		if (n==0) {
 			fprintf(stderr,"Connection to client lost\n\n");
