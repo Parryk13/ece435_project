@@ -25,6 +25,7 @@ int main(int argc, char **argv) {
 	char buffer[BUFFER_SIZE];
 	int n;
 	int time_to_exit=0;
+      char player2hit[9][9],player2fire[9][9];
 
 	port=atoi(argv[2]);//convert port string input to int and save as the port input
 
@@ -68,7 +69,19 @@ int main(int argc, char **argv) {
 			strerror(errno));
 		return -1;
 	}
-
+      boardinit(player2hit);
+	boardinit(player2fire);
+	printf("boards initialized\n");
+	display(player2hit);
+	setship(player2hit, 'b');
+	display(player2hit);
+	setship(player2hit, 'C');
+	display(player2hit);
+	setship(player2hit, 's');
+	display(player2hit);
+	setship(player2hit, 'd');
+	display(player2hit);
+	setship(player2hit, 'c');
 
 	/****************************************/
 	/* Main client loop 			*/
@@ -77,12 +90,14 @@ int main(int argc, char **argv) {
 	while(1) {
 
 		/* Prompt for a message */
-		printf("Please enter a message to send: ");
+		printf("Enter cordinates to fire: ");
 		memset(buffer,0,BUFFER_SIZE);
 
 		/* Read message */
 		fgets(buffer,BUFFER_SIZE-1,stdin);
-
+            if(findpoints(buffer,shots)<0){
+                  printf("invalid cordinates\n")
+            }
 		if (!strncmp(buffer,"bye",3)) time_to_exit=1;
 
 		/* Write to socket using the "write" system call */
@@ -98,9 +113,9 @@ int main(int argc, char **argv) {
 		if (n<0) {
 			fprintf(stderr,"Error reading socket! %s\n",
 				strerror(errno));
-		 
+
         }
-              
+
 		/* Print the response we got */
 		printf("Received back from server: %s\n\n",buffer);
 
@@ -113,4 +128,3 @@ int main(int argc, char **argv) {
 
 	return 0;
 }
-

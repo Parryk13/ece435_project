@@ -46,6 +46,7 @@ int findpoints(char *input, int *points){
                             break;
                         default:
                             return -1;
+                            break;
 
                     }
                     //printf("Point[0] set\n");
@@ -93,7 +94,6 @@ int findpoints(char *input, int *points){
                               break;
                         default:
                             return -1;
-                            break;
                     }
               }
          }
@@ -146,7 +146,8 @@ int setship(char board[9][9], char ship)
   int size,k,test;
 
 //Changes the size depending on which ship
-  switch(ship){
+  switch (ship)
+  {
       case 'd':
           size=2;
            printf("Enter start point for your destroyer (in form number-letter): ");
@@ -176,7 +177,7 @@ int setship(char board[9][9], char ship)
   scanf("%s", input);
  // printf("Input:%s\n", input);
   test=findpoints(input,point);
-  if(test <0)
+  if (test <0)
   {
         printf("Invalid Input\n");
         setship(board,ship);
@@ -185,7 +186,7 @@ int setship(char board[9][9], char ship)
   //prompt for direction
   printf("Choose a direction (u for up, d for down, l for left, or r for right): ");
   scanf("%s", direction);
-  if(direction[0] != 'u' && direction[0] != 'd' && direction[0] != 'l' && direction[0] != 'r')
+  if (direction[0] != 'u' && direction[0] != 'd' && direction[0] != 'l' && direction[0] != 'r')
   {
     printf("Invalid direction, please try again \n");
     setship(board,ship);

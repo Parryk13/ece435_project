@@ -21,6 +21,7 @@ int main(int argc, char **argv) {
 	struct sockaddr_in server_addr, client_addr;
 	struct addrinfo hints,*server_info;
 	int port=DEFAULT_PORT;
+	int shots[2],temp;
     	//int points[2];
     //char input[3]={'5','-','a'};
 	int n;
@@ -28,20 +29,20 @@ int main(int argc, char **argv) {
 	char buffer[BUFFER_SIZE];
 	int i, result;
 	//char** FiringBoard = NULL;
-	char PlayBoard[9][9];
-	boardinit(PlayBoard);
+	char player1fire[9][9],player1hit[9][9];
+	boardinit(player1hit);
 	printf("PlayBoard initialized\n");
-	display(PlayBoard);
+	display(player1hit);
 	printf("Set battleship\n");
-	setship(PlayBoard, 'b');
-	display(PlayBoard);
-	setship(PlayBoard, 'C');
-	display(PlayBoard);
-	setship(PlayBoard, 's');
-	display(PlayBoard);
-	setship(PlayBoard, 'd');
-	display(PlayBoard);
-	setship(PlayBoard, 'c');
+	setship(player1hit, 'b');
+	display(player1hit);
+	setship(player1hit, 'C');
+	display(player1hit);
+	setship(player1hit, 's');
+	display(player1hit);
+	setship(player1hit, 'd');
+	display(player1hit);
+	setship(player1hit, 'c');
 
 	printf("Starting server on port %d\n",port);
 
@@ -81,6 +82,7 @@ int main(int argc, char **argv) {
 	/* Tell the server we want to listen on the port */
 	/* Second argument is backlog, how many pending connections can */
 	/* build up */
+	printf("waiting for player 2\n", );
 	listen(socket_fd,5);
 
 	/* Call accept to create a new file descriptor for an incoming */
@@ -92,7 +94,22 @@ int main(int argc, char **argv) {
 	if (new_socket_fd<0) {
 		fprintf(stderr,"Error accepting! %s\n",strerror(errno));
 	}
+	printf("connected to player 2\n", );
+	restart:
 
+	boardinit(player1hit);
+	boardinit(player1fire);
+	printf("boards initialized\n");
+	display(player1hit);
+	setship(player1hit, 'b');
+	display(player1hit);
+	setship(player1hit, 'C');
+	display(player1hit);
+	setship(player1hit, 's');
+	display(player1hit);
+	setship(player1hit, 'd');
+	display(player1hit);
+	setship(player1hit, 'c');
 	while(1) {
 
 		/* Someone connected!  Let's try to read BUFFER_SIZE-1 bytes */
@@ -108,19 +125,31 @@ int main(int argc, char **argv) {
 		}
 
 		/* Print the message we received */
-		printf("Message from client: %s\n",buffer);
+		printf("shot from player 2\n");
+		findpoints(buffer,shots);
+		memset(buffer,0,BUFFER_SIZE);
+		buffer[0] = checkhit(player1hit,shots);
 
-		for(i=0;i<strlen(buffer);i++) {
-			if ((buffer[i]>='a') && (buffer[i]<='z')) {
-				buffer[i]=buffer[i]-0x20;
-			}
-		}
 
 		/* Send a response */
 		n = write(new_socket_fd,buffer,strlen(buffer));
 		if (n<0) {
 			fprintf(stderr,"Error writing. %s\n",
 				strerror(errno));
+		}
+		printf("enter firing cordinates: ")
+		fgets(buffer,BUFFER_SIZE-1,stdin);
+		findpoints(buffer,shots);
+		n = write(socket_fd,buffer,strlen(buffer));
+		n = read(new_socket_fd,buffer,(BUFFER_SIZE-1));
+		temp = fire(player1fire,buffer,shots);
+		if(temp>0)
+		{
+			printf("would you like to play again?");
+			memset(buffer,0,BUFFER_SIZE)
+			fgets(buffer,BUFFER_SIZE-1,stdin);
+			if (!strncmp(buffer,"yes",3)) goto restart;
+			else break;
 		}
 	}
 
