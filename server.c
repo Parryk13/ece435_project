@@ -100,7 +100,10 @@ int main(int argc, char **argv) {
 	setship(player1hit, 'c');
 	display(player1hit);
 	while(1) {
-
+		display(player2fire);
+            printf("--------------------------\n");
+            display(player2hit);
+		printf("waiting for player 2 to fire\n");
 		/* Someone connected!  Let's try to read BUFFER_SIZE-1 bytes */
 		memset(buffer,0,BUFFER_SIZE);
 		n = read(new_socket_fd,buffer,(BUFFER_SIZE-1));
@@ -118,6 +121,9 @@ int main(int argc, char **argv) {
 		findpoints(buffer,shots);
 		memset(buffer,0,BUFFER_SIZE);
 		buffer[0] = checkhit(player1hit,shots);
+		display(player2fire);
+		printf("--------------------------\n");
+		display(player2hit);
 		if(buffer[0]==-3)
 		{
 			printf("would you like to play again? ");

@@ -90,6 +90,9 @@ int main(int argc, char **argv) {
 	/****************************************/
 
 	while(1) {
+            display(player2fire);
+            printf("--------------------------\n");
+            display(player2hit);
 
 		/* Prompt for a message */
 		printf("Enter cordinates to fire: ");
@@ -119,7 +122,12 @@ int main(int argc, char **argv) {
 			if (!strncmp(buffer,"yes",3)) goto restart;
 			else break;
 		}
+            display(player2fire);
+            printf("--------------------------\n");
+            display(player2hit);
+            printf("waiting for player 1 to fire")
             n = read(socket_fd,buffer,(BUFFER_SIZE-1));
+            printf("\n");
             if (n==0) {
 			fprintf(stderr,"Connection to client lost\n\n");
 			break;
@@ -132,6 +140,9 @@ int main(int argc, char **argv) {
 		findpoints(buffer,shots);
 		memset(buffer,0,BUFFER_SIZE);
 		buffer[0] = checkhit(player2hit,shots);
+            display(player2fire);
+            printf("--------------------------\n");
+            display(player2hit);
             if(buffer[0]==-3)
 		{
 			printf("would you like to play again? ");
