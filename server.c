@@ -127,6 +127,11 @@ int main(int argc, char **argv) {
 		display(player1fire);
 		printf("--------------------------\n");
 		display(player1hit);
+		n = write(new_socket_fd,buffer,strlen(buffer));
+		if (n<0) {
+			fprintf(stderr,"Error writing. %s\n",
+				strerror(errno));
+		}
 		if(buffer[0]==4)
 		{
 			printf("would you like to play again? ");
@@ -137,7 +142,7 @@ int main(int argc, char **argv) {
 		}
 
 		/* Send a response */
-		n = write(new_socket_fd,buffer,strlen(buffer));
+
 		if (n<0) {
 			fprintf(stderr,"Error writing. %s\n",
 				strerror(errno));
