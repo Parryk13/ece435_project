@@ -96,11 +96,11 @@ int main(int argc, char **argv) {
 		memset(buffer,0,BUFFER_SIZE);
 
 		/* Read message */
-		fgets(buffer,BUFFER_SIZE-1,stdin);
+		scanf("%s",buffer);
             while (findpoints(buffer,shots)<0) {
 			printf("you're an idiot put in correct cordinates\n");
 			memset(buffer,0,BUFFER_SIZE);
-			fgets(buffer,BUFFER_SIZE-1,stdin);
+			scanf("%s",buffer);
 		}
 
 		/* Write to socket using the "write" system call */
@@ -115,7 +115,7 @@ int main(int argc, char **argv) {
 		{
 			printf("would you like to play again? ");
 			memset(buffer,0,BUFFER_SIZE);
-			fgets(buffer,BUFFER_SIZE-1,stdin);
+			scanf("%s",buffer);
 			if (!strncmp(buffer,"yes",3)) goto restart;
 			else break;
 		}
@@ -136,7 +136,7 @@ int main(int argc, char **argv) {
 		{
 			printf("would you like to play again? ");
 			memset(buffer,0,BUFFER_SIZE);
-			fgets(buffer,BUFFER_SIZE-1,stdin);
+			scanf("%s",buffer);
 			if (!strncmp(buffer,"yes",3)) goto restart;
 			else break;
 		}

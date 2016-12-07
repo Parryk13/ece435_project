@@ -30,19 +30,7 @@ int main(int argc, char **argv) {
 	int result;
 	//char** FiringBoard = NULL;
 	char player1fire[9][9],player1hit[9][9];
-	boardinit(player1hit);
-	printf("PlayBoard initialized\n");
-	display(player1hit);
-	printf("Set battleship\n");
-	setship(player1hit, 'b');
-	display(player1hit);
-	setship(player1hit, 'C');
-	display(player1hit);
-	setship(player1hit, 's');
-	display(player1hit);
-	setship(player1hit, 'd');
-	display(player1hit);
-	setship(player1hit, 'c');
+
 
 	printf("Starting server on port %d\n",port);
 
@@ -110,6 +98,7 @@ int main(int argc, char **argv) {
 	setship(player1hit, 'd');
 	display(player1hit);
 	setship(player1hit, 'c');
+	display(player1hit);
 	while(1) {
 
 		/* Someone connected!  Let's try to read BUFFER_SIZE-1 bytes */
@@ -133,7 +122,7 @@ int main(int argc, char **argv) {
 		{
 			printf("would you like to play again? ");
 			memset(buffer,0,BUFFER_SIZE);
-			fgets(buffer,BUFFER_SIZE-1,stdin);
+			scanf("%s",buffer);
 			if (!strncmp(buffer,"yes",3)) goto restart;
 			else break;
 		}
@@ -145,11 +134,11 @@ int main(int argc, char **argv) {
 				strerror(errno));
 		}
 		printf("enter firing cordinates: ");
-		fgets(buffer,BUFFER_SIZE-1,stdin);
+		scanf("%s",buffer);
 		while (findpoints(buffer,shots)<0) {
 			printf("you're an idiot put in correct cordinates\n");
 			memset(buffer,0,BUFFER_SIZE);
-			fgets(buffer,BUFFER_SIZE-1,stdin);
+			scanf("%s",buffer);
 		}
 		n = write(socket_fd,buffer,strlen(buffer));
 		n = read(new_socket_fd,buffer,(BUFFER_SIZE-1));
@@ -158,7 +147,7 @@ int main(int argc, char **argv) {
 		{
 			printf("would you like to play again?");
 			memset(buffer,0,BUFFER_SIZE);
-			fgets(buffer,BUFFER_SIZE-1,stdin);
+			scanf("%s",buffer);
 			if (!strncmp(buffer,"yes",3)) goto restart;
 			else break;
 		}
