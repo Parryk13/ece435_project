@@ -106,7 +106,7 @@ int findpoints(char *input, int *points){
     else {
          points[0]=-4;
          points[1]=-4;
-         return 0;
+         return -4;
     }
     printf("Exit\n");
     return 1;
@@ -181,7 +181,7 @@ int setship(char board[9][9], char ship)
   scanf("%s", input);
  // printf("Input:%s\n", input);
   test=findpoints(input,point);
-  printf("return value of findpoints:%d",test);
+  printf("return value of findpoints:%d\n",test);
   if (test <0)
   {
         printf("Invalid Input\n");
