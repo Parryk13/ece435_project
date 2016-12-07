@@ -101,7 +101,7 @@ int main(int argc, char **argv) {
 	setship(player1hit, 'c');
 	display(player1hit);
 	while(1) {
-		system("clear");
+
 		display(player1fire);
             printf("--------------------------\n");
             display(player1hit);
@@ -151,6 +151,7 @@ int main(int argc, char **argv) {
 		}
 		n = write(new_socket_fd,buffer,strlen(buffer));
 		n = read(new_socket_fd,buffer,(BUFFER_SIZE-1));
+		system("clear");
 		temp = fire(player1fire,buffer,shots);
 		if(temp>0)
 		{
