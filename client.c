@@ -17,7 +17,7 @@
 #define DEFAULT_HOSTNAME	"127.0.0.1"
 
 int main(int argc, char **argv) {
-    int firing_range[72];
+    
 	int socket_fd;
       int shots[2];
 	int port;
