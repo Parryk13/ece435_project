@@ -11,12 +11,16 @@
 
 int findpoints(char *input,int *points){
         int i;
-        if(strlen(input)>=3){
+        if(strlen(input)>=3)
+        {
 
-            for(i=0;i<3;i++){
+            for(i=0;i<3;i++)
+            {
 
-                if(i==0){
-                    switch(input[i]){
+                if(i==0)
+                {
+                    switch(input[i])
+                    {
                         case '1':
                             points[0]=0;
                             break;
@@ -179,6 +183,7 @@ int setship(char board[9][9], char ship)
   scanf("%s", input);
  // printf("Input:%s\n", input);
   test=findpoints(input,point);
+  printf("return value of findpoints:%d",test);
   if (test <0)
   {
         printf("Invalid Input\n");

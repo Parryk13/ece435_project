@@ -27,7 +27,7 @@ int main(int argc, char **argv) {
 	int n;
 	socklen_t client_len;
 	char buffer[BUFFER_SIZE];
-	int i, result;
+	int result;
 	//char** FiringBoard = NULL;
 	char player1fire[9][9],player1hit[9][9];
 	boardinit(player1hit);
@@ -82,7 +82,7 @@ int main(int argc, char **argv) {
 	/* Tell the server we want to listen on the port */
 	/* Second argument is backlog, how many pending connections can */
 	/* build up */
-	printf("waiting for player 2\n", );
+	printf("waiting for player 2\n");
 	listen(socket_fd,5);
 
 	/* Call accept to create a new file descriptor for an incoming */
@@ -94,7 +94,7 @@ int main(int argc, char **argv) {
 	if (new_socket_fd<0) {
 		fprintf(stderr,"Error accepting! %s\n",strerror(errno));
 	}
-	printf("connected to player 2\n", );
+	printf("connected to player 2\n");
 	restart:
 
 	boardinit(player1hit);
