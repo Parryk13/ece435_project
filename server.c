@@ -32,7 +32,6 @@ int main(int argc, char **argv) {
 	int result;
 	//char** FiringBoard = NULL;
 	char player1fire[9][9],player1hit[9][9];
-	sprintf(command, "clear")
 
 	printf("Starting server on port %d\n",port);
 
