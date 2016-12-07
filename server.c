@@ -127,7 +127,7 @@ int main(int argc, char **argv) {
 		display(player1fire);
 		printf("--------------------------\n");
 		display(player1hit);
-		if(buffer[0]==-3)
+		if(buffer[0]==4)
 		{
 			printf("would you like to play again? ");
 			memset(buffer,0,BUFFER_SIZE);
