@@ -23,7 +23,7 @@ int main(int argc, char **argv) {
 	struct hostent *server;
 	struct sockaddr_in server_addr;
 	char buffer[BUFFER_SIZE];
-	int n;
+	int n,temp;
 	int time_to_exit=0;
       char player2hit[9][9],player2fire[9][9];
 
@@ -109,7 +109,7 @@ int main(int argc, char **argv) {
 				strerror(errno));
 		}
             n = read(new_socket_fd,buffer,(BUFFER_SIZE-1));
-		temp = fire(player1fire,buffer,shots);
+		temp = fire(player2fire,buffer,shots);
 		if(temp>0)
 		{
 			printf("would you like to play again? ");
@@ -130,7 +130,7 @@ int main(int argc, char **argv) {
             printf("shot from player 1\n");
 		findpoints(buffer,shots);
 		memset(buffer,0,BUFFER_SIZE);
-		buffer[0] = checkhit(player1hit,shots);
+		buffer[0] = checkhit(player2hit,shots);
             if(buffer[0]==-3)
 		{
 			printf("would you like to play again? ");
