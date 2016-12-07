@@ -108,7 +108,7 @@ int main(int argc, char **argv) {
 			fprintf(stderr,"Error writing socket! %s\n",
 				strerror(errno));
 		}
-            n = read(new_socket_fd,buffer,(BUFFER_SIZE-1));
+            n = read(socket_fd,buffer,(BUFFER_SIZE-1));
 		temp = fire(player2fire,buffer,shots);
 		if(temp>0)
 		{
@@ -118,7 +118,7 @@ int main(int argc, char **argv) {
 			if (!strncmp(buffer,"yes",3)) goto restart;
 			else break;
 		}
-            n = read(new_socket_fd,buffer,(BUFFER_SIZE-1));
+            n = read(socket_fd,buffer,(BUFFER_SIZE-1));
             if (n==0) {
 			fprintf(stderr,"Connection to client lost\n\n");
 			break;
@@ -141,7 +141,7 @@ int main(int argc, char **argv) {
 		}
 
 		/* Send a response */
-		n = write(new_socket_fd,buffer,strlen(buffer));
+		n = write(socket_fd,buffer,strlen(buffer));
 		if (n<0) {
 			fprintf(stderr,"Error writing. %s\n",
 				strerror(errno));
