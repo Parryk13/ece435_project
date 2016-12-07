@@ -280,3 +280,54 @@ int setship(char board[9][9], char ship)
       }
       return 0;
 }
+
+int checkhit(char board[9][9], int *coord){
+      int i, j;
+      if(board[coord[0]][coord[1]] == ' '){
+            printf("Miss at [%d][%d]\n", coord[0], coord[1]);
+            board[coord[0]][coord[1]] = 'O';
+            return 1;
+      }
+      else if(board[coord[0]][coord[1]] == 'X'){
+            printf("Miss at [%d][%d]\n", coord[0], coord[1]);
+            return -1;
+      }
+      else{
+            board[coord[0]][coord[1]] = 'X';
+            printf("Hit at [%d][%d]\n", coord[0], coord[1]);
+            for(i=0; i<9; i++){
+                  for(j=0; j<9; j++){
+                        if(board[i][j] != 'X' && board[i][j] != 'o' && board[i][j] != ' ') return 2;
+                  }
+            }
+            printf("You lost! Get 'em next time\n'");
+            return -3;
+      }
+}
+
+int fire(char board[9][9], char* status, int *coord){
+      if (status[0] == 1)
+      {
+            printf("Miss\n");
+            board[coord[0]][coord[1]] = 'O';
+            return 0;
+      }
+      if (status[0] == -1)
+      {
+            printf("Shot in repeat location\n");
+            return 0;
+      }
+      if (status[0] == 2)
+      {
+            printf("Hit!\n");
+            board[coord[0]][coord[1]] = 'X';
+            return 0;
+      }
+      if (status[0] == -3)
+      {
+            printf("YOU WON!");
+            return 1;
+      }
+      printf("Status invalid\n");
+      return -1;
+}
