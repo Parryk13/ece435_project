@@ -293,14 +293,14 @@ char checkhit(char board[9][9], int *coord){
       }
       else if(board[coord[0]][coord[1]] == 'X'){
             printf("Miss at [%d][%d]\n", coord[0], coord[1]);
-            return -1;
+            return 2;
       }
       else{
             board[coord[0]][coord[1]] = 'X';
             printf("Hit at [%d][%d]\n", coord[0], coord[1]);
             for(i=0; i<9; i++){
                   for(j=0; j<9; j++){
-                        if(board[i][j] != 'X' && board[i][j] != 'o' && board[i][j] != ' ') return 2;
+                        if(board[i][j] != 'X' && board[i][j] != 'o' && board[i][j] != ' ') return 3;
                   }
             }
             printf("You lost! Get 'em next time\n'");
@@ -315,12 +315,12 @@ int fire(char board[9][9], char* status, int *coord){
             board[coord[0]][coord[1]] = 'O';
             return 0;
       }
-      if (status[0] == -1)
+      if (status[0] == 2)
       {
             printf("Shot in repeat location\n");
             return 0;
       }
-      if (status[0] == 2)
+      if (status[0] == 3)
       {
             printf("Hit!\n");
             board[coord[0]][coord[1]] = 'X';
