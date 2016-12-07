@@ -122,8 +122,8 @@ int main(int argc, char **argv) {
 		printf("shot from player 2\n");
 		findpoints(buffer,shots);
 		memset(buffer,0,BUFFER_SIZE);
-		buffer[0] = checkhit(player1hit,shots);
 		system("clear");
+		buffer[0] = checkhit(player1hit,shots);
 		display(player1fire);
 		printf("--------------------------\n");
 		display(player1hit);

@@ -88,11 +88,12 @@ int main(int argc, char **argv) {
 	/****************************************/
 	/* Main client loop 			*/
 	/****************************************/
-
+      system("clear");
+      display(player2fire);
+      printf("--------------------------\n");
+      display(player2hit);
 	while(1) {
-            display(player2fire);
-            printf("--------------------------\n");
-            display(player2hit);
+
 
 		/* Prompt for a message */
 		printf("Enter cordinates to fire: ");
@@ -113,6 +114,7 @@ int main(int argc, char **argv) {
 				strerror(errno));
 		}
             n = read(socket_fd,buffer,(BUFFER_SIZE-1));
+            system("clear");
 		temp = fire(player2fire,buffer,shots);
 		if(temp>0)
 		{
@@ -139,6 +141,7 @@ int main(int argc, char **argv) {
             printf("shot from player 1\n");
 		findpoints(buffer,shots);
 		memset(buffer,0,BUFFER_SIZE);
+            system("clear");
 		buffer[0] = checkhit(player2hit,shots);
             display(player2fire);
             printf("--------------------------\n");
