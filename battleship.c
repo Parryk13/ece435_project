@@ -284,7 +284,7 @@ int setship(char board[9][9], char ship)
       return 0;
 }
 
-int checkhit(char board[9][9], int *coord){
+char checkhit(char board[9][9], int *coord){
       int i, j;
       if(board[coord[0]][coord[1]] == ' '){
             printf("Miss at [%d][%d]\n", coord[0], coord[1]);
