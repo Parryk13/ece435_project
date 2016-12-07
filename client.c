@@ -3,7 +3,7 @@
 #include <unistd.h>
 #include <string.h>
 #include <errno.h>
-
+#include "battleship.h"
 #include <sys/socket.h>
 
 #include <netdb.h>
