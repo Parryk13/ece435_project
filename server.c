@@ -140,7 +140,7 @@ int main(int argc, char **argv) {
 			memset(buffer,0,BUFFER_SIZE);
 			scanf("%s",buffer);
 		}
-		n = write(socket_fd,buffer,strlen(buffer));
+		n = write(new_socket_fd,buffer,strlen(buffer));
 		n = read(new_socket_fd,buffer,(BUFFER_SIZE-1));
 		temp = fire(player1fire,buffer,shots);
 		if(temp>0)
