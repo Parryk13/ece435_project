@@ -150,7 +150,7 @@ int main(int argc, char **argv) {
 		printf("enter firing cordinates: ");
 		scanf("%s",buffer);
 		while (findpoints(buffer,shots)<0) {
-			printf("you're an idiot put in correct cordinates\n");
+			printf("you're an idiot put in correct coordinates\n");
 			memset(buffer,0,BUFFER_SIZE);
 			scanf("%s",buffer);
 		}
