@@ -281,7 +281,7 @@ int setship(char board[9][9], char ship)
 }
 
 int checkhit(char board[9][9], int *coord){
-      int state, i, j;
+      int i, j;
       if(board[coord[0]][coord[1]] == ' '){
             printf("Miss at [%d][%d]\n", coord[0], coord[1]);
             board[coord[0]][coord[1]] = 'O';
@@ -296,7 +296,7 @@ int checkhit(char board[9][9], int *coord){
             printf("Hit at [%d][%d]\n", coord[0], coord[1]);
             for(i=0; i<9; i++){
                   for(j=0; j<9; j++){
-                        if(board[i][j] != 'X' && board[i][j] != 'o' board[i][j] != ' ') return 2;
+                        if(board[i][j] != 'X' && board[i][j] != 'o' && board[i][j] != ' ') return 2;
                   }
             }
             printf("You lost! Get 'em next time\n'");
