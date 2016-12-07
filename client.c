@@ -125,7 +125,7 @@ int main(int argc, char **argv) {
             display(player2fire);
             printf("--------------------------\n");
             display(player2hit);
-            printf("waiting for player 1 to fire")
+            printf("waiting for player 1 to fire");
             n = read(socket_fd,buffer,(BUFFER_SIZE-1));
             printf("\n");
             if (n==0) {
