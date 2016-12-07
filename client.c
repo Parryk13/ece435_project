@@ -69,6 +69,7 @@ int main(int argc, char **argv) {
 			strerror(errno));
 		return -1;
 	}
+      restart:
       boardinit(player2hit);
 	boardinit(player2fire);
 	printf("boards initialized\n");
@@ -95,10 +96,11 @@ int main(int argc, char **argv) {
 
 		/* Read message */
 		fgets(buffer,BUFFER_SIZE-1,stdin);
-            if(findpoints(buffer,shots)<0){
-                  printf("invalid cordinates\n")
-            }
-		if (!strncmp(buffer,"bye",3)) time_to_exit=1;
+            while (findpoints(buffer,shots)<0) {
+			printf("you're an idiot put in correct cordinates\n");
+			memset(buffer,0,BUFFER_SIZE);
+			fgets(buffer,BUFFER_SIZE-1,stdin);
+		}
 
 		/* Write to socket using the "write" system call */
 		n = write(socket_fd,buffer,strlen(buffer));
@@ -106,21 +108,44 @@ int main(int argc, char **argv) {
 			fprintf(stderr,"Error writing socket! %s\n",
 				strerror(errno));
 		}
-
-		/* Clear buffer and read the response from the server */
-		memset(buffer,0,BUFFER_SIZE);
-		n = read(socket_fd,buffer,BUFFER_SIZE-1);
-		if (n<0) {
-			fprintf(stderr,"Error reading socket! %s\n",
+            n = read(new_socket_fd,buffer,(BUFFER_SIZE-1));
+		temp = fire(player1fire,buffer,shots);
+		if(temp>0)
+		{
+			printf("would you like to play again? ");
+			memset(buffer,0,BUFFER_SIZE);
+			fgets(buffer,BUFFER_SIZE-1,stdin);
+			if (!strncmp(buffer,"yes",3)) goto restart;
+			else break;
+		}
+            n = read(new_socket_fd,buffer,(BUFFER_SIZE-1));
+            if (n==0) {
+			fprintf(stderr,"Connection to client lost\n\n");
+			break;
+		}
+		else if (n<0) {
+			fprintf(stderr,"Error reading from socket %s\n",
 				strerror(errno));
+		}
+            printf("shot from player 1\n");
+		findpoints(buffer,shots);
+		memset(buffer,0,BUFFER_SIZE);
+		buffer[0] = checkhit(player1hit,shots);
+            if(buffer[0]==-3)
+		{
+			printf("would you like to play again? ");
+			memset(buffer,0,BUFFER_SIZE);
+			fgets(buffer,BUFFER_SIZE-1,stdin);
+			if (!strncmp(buffer,"yes",3)) goto restart;
+			else break;
+		}
 
-        }
-
-		/* Print the response we got */
-		printf("Received back from server: %s\n\n",buffer);
-
-		if (time_to_exit) break;
-
+		/* Send a response */
+		n = write(new_socket_fd,buffer,strlen(buffer));
+		if (n<0) {
+			fprintf(stderr,"Error writing. %s\n",
+				strerror(errno));
+		}
 	}
 
 	/* All finished, close the socket/file descriptor */

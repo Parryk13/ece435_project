@@ -129,7 +129,14 @@ int main(int argc, char **argv) {
 		findpoints(buffer,shots);
 		memset(buffer,0,BUFFER_SIZE);
 		buffer[0] = checkhit(player1hit,shots);
-
+		if(buffer[0]==-3)
+		{
+			printf("would you like to play again? ");
+			memset(buffer,0,BUFFER_SIZE);
+			fgets(buffer,BUFFER_SIZE-1,stdin);
+			if (!strncmp(buffer,"yes",3)) goto restart;
+			else break;
+		}
 
 		/* Send a response */
 		n = write(new_socket_fd,buffer,strlen(buffer));
@@ -139,7 +146,11 @@ int main(int argc, char **argv) {
 		}
 		printf("enter firing cordinates: ");
 		fgets(buffer,BUFFER_SIZE-1,stdin);
-		findpoints(buffer,shots);
+		while (findpoints(buffer,shots)<0) {
+			printf("you're an idiot put in correct cordinates\n");
+			memset(buffer,0,BUFFER_SIZE);
+			fgets(buffer,BUFFER_SIZE-1,stdin);
+		}
 		n = write(socket_fd,buffer,strlen(buffer));
 		n = read(new_socket_fd,buffer,(BUFFER_SIZE-1));
 		temp = fire(player1fire,buffer,shots);
