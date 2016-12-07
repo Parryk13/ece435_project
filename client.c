@@ -17,15 +17,14 @@
 #define DEFAULT_HOSTNAME	"127.0.0.1"
 
 int main(int argc, char **argv) {
-    int firing_range[72];
+    
 	int socket_fd;
       int shots[2];
-	int port,x,y;
+	int port;
 	struct hostent *server;
 	struct sockaddr_in server_addr;
 	char buffer[BUFFER_SIZE];
 	int n,temp;
-	int time_to_exit=0;
       char player2hit[9][9],player2fire[9][9];
 
 	port=atoi(argv[2]);//convert port string input to int and save as the port input
