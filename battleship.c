@@ -9,7 +9,7 @@
 #include "battleship.h"
 
 
-int findpoints(char *input,int *points){
+int findpoints(char *input, int *points){
         int i;
         if(strlen(input)>=3){
 
@@ -95,9 +95,7 @@ int findpoints(char *input,int *points){
                             return -1;
                             break;
                     }
-                  //printf("Point[1] set\n");
               }
-              //printf("i=%d\n",i);
          }
     }
 
