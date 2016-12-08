@@ -114,7 +114,7 @@ int findpoints(char *input, int *points){
 
 
 int boardinit(char board[9][9])
-{
+{ //fill the board with ' ' space Characters
 	int i,j;
 	for(i=0; i<9; i++)
 	{
@@ -127,7 +127,7 @@ int boardinit(char board[9][9])
 }
 
 void display(char board[9][9])
-{
+{     //print the board and populate it with the contents of board array
 	int i,j;
 	printf("   A B C D E F G H I \n");
 	for(i=0; i<9; i++)
