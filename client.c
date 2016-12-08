@@ -7,7 +7,7 @@
 #include <sys/socket.h>
 
 #include <netdb.h>
-
+//Original code received from Vince Weaver and Modified for our purposes
 /* Default port.  Must be from 1024 to 65536 for normal user */
 #define DEFAULT_PORT	31337
 
@@ -17,7 +17,7 @@
 #define DEFAULT_HOSTNAME	"127.0.0.1"
 
 int main(int argc, char **argv) {
-    
+
 	int socket_fd;
       int shots[2];
 	int port;
@@ -70,6 +70,7 @@ int main(int argc, char **argv) {
 		return -1;
 	}
       restart:
+      //let players set up their boards
       boardinit(player2hit);
 	boardinit(player2fire);
 	printf("boards initialized\n");
@@ -111,22 +112,24 @@ int main(int argc, char **argv) {
 		if (n<0) {
 			fprintf(stderr,"Error writing socket! %s\n",
 				strerror(errno));
-		}
+		} //read back ack from other player
             n = read(socket_fd,buffer,(BUFFER_SIZE-1));
             system("clear");
+            //use ack in fire() to determine if hit, miss or win
 		temp = fire(player2fire,buffer,shots);
 		if(temp>0)
-		{
+		{ //check for a win
 			printf("would you like to play again? ");
 			memset(buffer,0,BUFFER_SIZE);
 			scanf("%s",buffer);
 			if (!strncmp(buffer,"yes",3)) goto restart;
 			else break;
-		}
+		} //update board after fire, and tell player we are waiting for other player
             display(player2fire);
             printf("--------------------------\n");
             display(player2hit);
             printf("waiting for player 1 to fire");
+            memset(buffer,0,BUFFER_SIZE-1);
             n = read(socket_fd,buffer,(BUFFER_SIZE-1));
             printf("\n");
             if (n==0) {
@@ -138,16 +141,19 @@ int main(int argc, char **argv) {
 				strerror(errno));
 		}
             printf("shot from player 1\n");
-		findpoints(buffer,shots);
+            //see where we were shot at.
+            findpoints(buffer,shots);
 		memset(buffer,0,BUFFER_SIZE);
             system("clear");
 		buffer[0] = checkhit(player2hit,shots);
+            //update and display modified buffer
             display(player2fire);
             printf("--------------------------\n");
             display(player2hit);
             n = write(socket_fd,buffer,strlen(buffer));
+            //write ack back to player 1
             if(buffer[0]==4)
-		{
+		{ //check to see if we lost
 			printf("would you like to play again? ");
 			memset(buffer,0,BUFFER_SIZE);
 			scanf("%s",buffer);

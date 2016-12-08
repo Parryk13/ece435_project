@@ -9,7 +9,7 @@
 #include <netdb.h>
 #include "battleship.h"
 
-
+//Original code received from Vince Weaver and Modified for our purposes
 #define BUFFER_SIZE	256
 
 /* Default port to listen on */
@@ -85,7 +85,7 @@ int main(int argc, char **argv) {
 	}
 	printf("connected to player 2\n");
 	restart:
-
+	//let players setup their boards
 	boardinit(player1hit);
 	boardinit(player1fire);
 	printf("boards initialized\n");
@@ -101,7 +101,7 @@ int main(int argc, char **argv) {
 	setship(player1hit, 'c');
 	display(player1hit);
 	while(1) {
-
+		//hit round for player 1
 		display(player1fire);
             printf("--------------------------\n");
             display(player1hit);
@@ -119,12 +119,12 @@ int main(int argc, char **argv) {
 		}
 
 		/* Print the message we received */
-		printf("shot from player 2\n");
+		printf("shot from player 2\n"); //got shot from player
 		findpoints(buffer,shots);
 		memset(buffer,0,BUFFER_SIZE);
-		system("clear");
-		buffer[0] = checkhit(player1hit,shots);
-		display(player1fire);
+		system("clear"); //clear screen so their isnt multiple screens
+		buffer[0] = checkhit(player1hit,shots); //run checkhit to see if we were hit
+		display(player1fire); //print display
 		printf("--------------------------\n");
 		display(player1hit);
 		n = write(new_socket_fd,buffer,strlen(buffer));
@@ -133,7 +133,7 @@ int main(int argc, char **argv) {
 				strerror(errno));
 		}
 		if(buffer[0]==4)
-		{
+		{ //check to see if we lost
 			printf("would you like to play again? ");
 			memset(buffer,0,BUFFER_SIZE);
 			scanf("%s",buffer);
@@ -147,24 +147,25 @@ int main(int argc, char **argv) {
 			fprintf(stderr,"Error writing. %s\n",
 				strerror(errno));
 		}
-		printf("enter firing cordinates: ");
+		printf("enter firing cordinates: "); //begining of player 1 firing round
 		scanf("%s",buffer);
 		while (findpoints(buffer,shots)<0) {
 			printf("you're an idiot put in correct cordinates\n");
 			memset(buffer,0,BUFFER_SIZE);
 			scanf("%s",buffer);
 		}
-		n = write(new_socket_fd,buffer,strlen(buffer));
-		n = read(new_socket_fd,buffer,(BUFFER_SIZE-1));
+		n = write(new_socket_fd,buffer,strlen(buffer)); //send coordinates
+		n = read(new_socket_fd,buffer,(BUFFER_SIZE-1)); //gets back ack
 		system("clear");
-		temp = fire(player1fire,buffer,shots);
+		temp = fire(player1fire,buffer,shots); //put ack into fire and modify buffer
 		if(temp>0)
-		{
+		{//check to see if player 1 won
 			printf("would you like to play again?");
 			memset(buffer,0,BUFFER_SIZE);
 			scanf("%s",buffer);
 			if (!strncmp(buffer,"yes",3)) goto restart;
 			else break;
+			//loop back to top and repeat until game is over
 		}
 	}
 
