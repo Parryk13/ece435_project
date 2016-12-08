@@ -102,7 +102,7 @@ int main(int argc, char **argv) {
 		/* Read message */
 		scanf("%s",buffer);
             while (findpoints(buffer,shots)<0) {
-			printf("you're an idiot put in correct cordinates\n");
+			printf("you're an idiot put in correct coordinates\n");
 			memset(buffer,0,BUFFER_SIZE);
 			scanf("%s",buffer);
 		}
