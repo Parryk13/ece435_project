@@ -53,7 +53,6 @@ int findpoints(char *input, int *points){
                             break;
 
                     }
-                    //printf("Point[0] set\n");
                 }
                 else if(i==1&&input[i]!='-'){
                            points[0]=-2;
@@ -64,7 +63,6 @@ int findpoints(char *input, int *points){
 
 
                 else if(i==2){
-                    //printf("Character - recognized\n");
                     switch (input[i]) {
                         case 'a':
                             points[1]=0;
@@ -108,13 +106,13 @@ int findpoints(char *input, int *points){
          points[1]=-4;
          return -4;
     }
-   // printf("Exit\n");
     return 1;
 }
 
 
 int boardinit(char board[9][9])
-{ //fill the board with ' ' space Characters
+{
+      //fill the board with ' ' space Characters
 	int i,j;
 	for(i=0; i<9; i++)
 	{
@@ -127,7 +125,8 @@ int boardinit(char board[9][9])
 }
 
 void display(char board[9][9])
-{     //print the board and populate it with the contents of board array
+{
+      //print the board and populate it with the contents of board array
 	int i,j;
 	printf("   A B C D E F G H I \n");
 	for(i=0; i<9; i++)
@@ -215,12 +214,14 @@ int setship(char board[9][9], char ship)
                return 0;
               }
             }
+            //sets ships in ascending rows
             for(k=0; k<size; k++)
             {
               board[point[0] - k][point[1]] = ship;
             }
             break;
       case 'd':
+            //checks ships don't overflow board
             if (point[0] + (size-1) > 8)
             {
               printf("Invalid placement, please try again \n");
@@ -235,18 +236,21 @@ int setship(char board[9][9], char ship)
                return 0;
               }
             }
+            //ships placed in descending rows
             for(k=0; k<size; k++)
             {
               board[point[0] + k][point[1]] = ship;
             }
             break;
       case 'l':
+            //checks that ship placement doesn't overflow board
             if(point[1] - (size-1) < 0)
             {
                   printf("Invalid placement, please try again \n");
                   setship(board,ship);
                  return 0;
             }
+            //checks that ship placement doesn't overwrite ships
             for( k=0; k<size; k++)
             {
                   if(board[point[0]][point[1] - k] != ' '){
@@ -255,18 +259,21 @@ int setship(char board[9][9], char ship)
                         return 0;
                   }
             }
+            //sets ships in ascending column
             for( k=0; k<size; k++)
             {
                   board[point[0]][point[1] - k] = ship;
             }
             break;
       case 'r':
+            //checks that ship placement doesn't overflow board
             if(point[1] + (size-1) > 8)
             {
                   printf("Invalid placement, please try again \n");
                   setship(board,ship);
                   return 0;
             }
+            //checks that ship placement doesn't overwrite ships
             for( k=0; k<size; k++)
             {
                   if(board[point[0]][point[1]+k] != ' '){
@@ -275,6 +282,7 @@ int setship(char board[9][9], char ship)
                         return 0;
                   }
             }
+            //places ships in descending columns
             for( k=0; k<size; k++)
             {
                   board[point[0]][point[1]+k] = ship;
@@ -286,11 +294,15 @@ int setship(char board[9][9], char ship)
 
 char checkhit(char board[9][9], int *coord){
       int i, j;
+      //checks if oponents firing coordinates has an empty space
       if(board[coord[0]][coord[1]] == ' '){
             printf("Miss at [%d][%d]\n", coord[0], coord[1]);
+            //play board coordinates are set to miss marker
             board[coord[0]][coord[1]] = 'O';
+            //returns "miss" value
             return 1;
       }
+      //checks if a hit was already recorded
       else if(board[coord[0]][coord[1]] == 'X'){
             printf("Miss at [%d][%d]\n", coord[0], coord[1]);
             return 2;
@@ -300,19 +312,24 @@ char checkhit(char board[9][9], int *coord){
             return 0;
       }
       else{
+            //play board coordinates are set to hit marker
             board[coord[0]][coord[1]] = 'X';
             printf("Hit at [%d][%d]\n", coord[0], coord[1]);
+            //checks whole board for ship values
             for(i=0; i<9; i++){
                   for(j=0; j<9; j++){
+                        //if ship spaces remain, returns hit value
                         if(board[i][j] != 'X' && board[i][j] != 'O' && board[i][j] != ' ') return 3;
                   }
             }
+            //if no ship spaces remain, return game over value
             printf("You lost! Get 'em next time\n'");
             return 4;
       }
 }
 
 int fire(char board[9][9], char* status, int *coord){
+      //if status from checkhit is miss value
       if (status[0] == 1)
       {
             printf("Miss\n\n");
@@ -320,21 +337,25 @@ int fire(char board[9][9], char* status, int *coord){
             return 0;
       }
       if (status[0] == 2 || status[0]=0)
+
       {
             printf("Shot in repeat location\n\n");
             return 0;
       }
+      //if status from checkhit is hit value
       if (status[0] == 3)
       {
             printf("Hit!\n\n");
             board[coord[0]][coord[1]] = 'X';
             return 0;
       }
+      //if status from checkhit is game over value
       if (status[0] == 4)
       {
             printf("YOU WON!");
             return 1;
       }
+      //if status from checkhit doesn't hit any known values
       printf("Status invalid\n\n");
       return -1;
 }
